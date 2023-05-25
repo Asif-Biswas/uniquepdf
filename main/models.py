@@ -12,6 +12,7 @@ class Profile(models.Model):
     address = models.CharField(max_length=200)
     graduationyear = models.IntegerField()
     certificate_id = models.CharField(max_length=10, default="000000")
+    transcript_id = models.CharField(max_length=10, default="000000")
     
     def __str__(self):
         return self.username

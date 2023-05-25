@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Profile
+import random
 
 
 # Create your views here.
@@ -102,6 +103,11 @@ def register(request):
             len_of_total_profile = len_of_total_profile.zfill(5)
             certificate_id = graduationyear[-2:] + len_of_total_profile
 
+        transcript_id = graduationyear[-2:] + str(random.randint(10000, 99999))
+        while Profile.objects.filter(transcript_id=transcript_id).exists():
+            transcript_id = graduationyear[-2:] + str(random.randint(10000, 99999))
+
+
         profile = Profile.objects.create(
             user=user,
             firstname=firstname, 
@@ -111,7 +117,8 @@ def register(request):
             contact=contact, 
             address=address, 
             graduationyear=graduationyear,
-            certificate_id=certificate_id)
+            certificate_id=certificate_id,
+            transcript_id=transcript_id)
         profile.save()
         messages.success(request, "Account created successfully")
         return render(request, "login.html")
@@ -135,7 +142,7 @@ def tverify(request):
     if request.method == "POST":
         certificate_id = request.POST.get("pdf")
         try:
-            profile = Profile.objects.get(certificate_id=certificate_id)
+            profile = Profile.objects.get(transcript_id=certificate_id)
         except:
             messages.error(request, "Invalid Transcript ID")
             return render(request, "tverify.html")

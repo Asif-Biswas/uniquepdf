@@ -84,7 +84,7 @@
 
         function viewtpdf() {
             var pdf = new jsPDF();
-            pdf.text("Transcript ID: {{profile.certificate_id}}", 10, 10);
+            pdf.text("Transcript ID: {{profile.transcript_id}}", 10, 10);
             pdf.text("Name: {{profile.firstname}} {{profile.lastname}}", 10, 20);
             pdf.text("Email: {{profile.email}}", 10, 30);
             pdf.text("Contact: {{profile.contact}}", 10, 40);
