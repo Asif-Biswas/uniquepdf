@@ -28,6 +28,7 @@
     <div class="container">
         <div class="row">
             <div id="certificate" class="col-md-12 text-center mt-5">
+                <p>Certificate ID {{ profile.certificate_id }}</p>
                 <p>First Name: {{ profile.firstname }}</p>
                 <p>Last Name: {{ profile.lastname }}</p>
                 <p>Username: {{ profile.username }}</p>
@@ -36,14 +37,33 @@
                 <p>Student ID: {{ profile.address }}</p>
                 <p>Graduation Year: {{ profile.graduationyear }}</p>
             </div>
+            <div id="show-pdf" class="d-none"></div>
 
         </div>
         <div class="d-flex justify-content-center mt-5">
-            <a href="{% url 'pdf' %}" class="btn btn-primary">View Certificate</a>
+            <button onclick="viewpdf()" class="btn btn-primary">View Certificate</button>
+            <a href="{% url 'pdf' %}" class=" ml-2 btn btn-primary">Download Certificate</a>
+            <a href="{% url 'pdf' %}" class=" ml-2 btn btn-primary">Download Transcript</a>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
     <script>
+        function viewpdf() {
+            var doc = new jsPDF();
+            doc.text(20, 20, 'Hello world!');
+            doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
+            doc.addPage();
+            doc.text(20, 20, 'Do you like that?');
+
+            const showPDF = document.getElementById('show-pdf');
+            showPDF.classList.remove('d-none');
+            const certificate = document.getElementById('certificate');
+            certificate.classList.add('d-none');
+
+            // show the pdf 
+
+        }
     </script>
 </body>
 </html>

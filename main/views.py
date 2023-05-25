@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -35,7 +35,7 @@ def login_view(request):
         if user is not None:
             # A backend authenticated the credentials
             login(request, user)
-            return render(request, "home.html")
+            return redirect("profile")
         else:
             # No backend authenticated the credentials
             messages.error(request, "Invalid Credentials")
