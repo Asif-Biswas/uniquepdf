@@ -38,8 +38,27 @@
 
         </div>
         <div class="d-flex justify-content-center mt-5">
-            <button class="btn btn-primary text-center" onclick="window.print()">Print</button>
+            <button class="btn btn-primary text-center" onclick="generatePDF()">Print</button>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+    <script>
+        function generatePDF() {
+            var pdf = new jsPDF({
+                orientation: 'p',
+                unit: 'mm',
+                format: 'a5',
+                putOnlyUsedFonts:true
+                });
+            pdf.text("Certificate ID: {{profile.certificate_id}}", 10, 10);
+            pdf.text("Name: {{profile.firstname}} {{profile.lastname}}", 10, 20);
+            pdf.text("Email: {{profile.email}}", 10, 30);
+            pdf.text("Contact: {{profile.contact}}", 10, 40);
+            pdf.text("Student ID: {{profile.address}}", 10, 50);
+            pdf.text("Graduation Year: {{profile.graduationyear}}", 10, 60);
+            pdf.save("certificate.pdf");
+        }
+    </script>
 </body>
 </html>

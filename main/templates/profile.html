@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #certificate, #certificate * {
+                visibility: visible;
+            }
+            #certificate {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="row">
+            <div id="certificate" class="col-md-12 text-center mt-5">
+                <p>First Name: {{ first_name }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>
