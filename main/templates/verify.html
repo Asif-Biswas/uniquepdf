@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="container">
+        <div class="d-flex justify-content-center mt-5">
+            <form class="card p-5" style="display: flex; flex-direction: column; align-items: center;" method="post" action="{% url 'verify' %}">
+                {% csrf_token %}
+                <h3 class="mb-4">Verify Certificate</h3>
+                <input type="text" name="pdf" id="pdf" class="form-control" placeholder="Enter Certificate ID" required>
+                <button type="submit" class="btn btn-primary mt-3">Verify</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

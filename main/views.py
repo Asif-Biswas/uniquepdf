@@ -101,3 +101,15 @@ def register(request):
         return render(request, "login.html")
         
     return render(request, "register.html")
+
+
+def verify(request):
+    if request.method == "POST":
+        certificate_id = request.POST.get("pdf")
+        try:
+            profile = Profile.objects.get(certificate_id=certificate_id)
+        except:
+            messages.error(request, "Invalid Certificate ID")
+            return render(request, "verify.html")
+        return render(request, "pdf.html", {"profile": profile})
+    return render(request, "verify.html")
