@@ -25,6 +25,22 @@ def pdf(request):
     certificate_id = graduation_year_last_2_digits + len_of_total_profile
     return render(request, "pdf.html", {"profile": profile, "certificate_id": certificate_id})
 
+def tpdf(request):
+    if request.user.is_anonymous:
+        messages.error(request, "Please login to Download PDF")
+        return render(request, "login.html")
+    try:
+        profile = Profile.objects.get(username=request.user.username)
+    except:
+        messages.error(request, "Please update your profile to Download PDF")
+        return render(request, "home.html")
+    graduation_year_last_2_digits = str(profile.graduationyear)[-2:]
+    len_of_total_profile = Profile.objects.all().count()
+    len_of_total_profile = str(len_of_total_profile)
+    len_of_total_profile = len_of_total_profile.zfill(5)
+    certificate_id = graduation_year_last_2_digits + len_of_total_profile
+    return render(request, "tpdf.html", {"profile": profile, "certificate_id": certificate_id})
+
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
