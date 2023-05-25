@@ -12,6 +12,11 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'verify' %}">Verify</span></a>
           </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+        </li>
+        {% endif %}
       </ul>
       <div class="form-inline my-2 my-lg-0">
         {% comment %} <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> {% endcomment %}

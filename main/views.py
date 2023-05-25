@@ -113,3 +113,8 @@ def verify(request):
             return render(request, "verify.html")
         return render(request, "pdf.html", {"profile": profile})
     return render(request, "verify.html")
+
+
+def profile(request):
+    profile = Profile.objects.get(username=request.user.username)
+    return render(request, "profile.html", {"profile": profile})
