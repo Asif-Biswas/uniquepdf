@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Profile
 import random
+# import ;ogin required
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -25,6 +27,7 @@ def pdf(request):
     len_of_total_profile = len_of_total_profile.zfill(5)
     certificate_id = graduation_year_last_2_digits + len_of_total_profile
     return render(request, "pdf.html", {"profile": profile, "certificate_id": certificate_id})
+
 
 def tpdf(request):
     if request.user.is_anonymous:
@@ -149,6 +152,7 @@ def tverify(request):
         return render(request, "tpdf.html", {"profile": profile})
     return render(request, "tverify.html")
 
+@login_required(login_url="login")
 def profile(request):
     profile = Profile.objects.get(username=request.user.username)
     return render(request, "profile.html", {"profile": profile})
