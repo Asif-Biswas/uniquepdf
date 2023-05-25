@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="d-flex justify-content-center">
+        <form class="card mt-5 p-5" style="min-width: 600px;" action="{% url 'login' %}" method="POST">{% csrf_token %}
+            <h1 class="text-center">Login</h1>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button> <br/>
+            <a href="/register">Don't have an account? Register here</a>
+        </form>
+    </div>
+</body>
+</html>
