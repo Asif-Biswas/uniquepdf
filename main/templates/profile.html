@@ -37,7 +37,7 @@
                 <p>Student ID: {{ profile.address }}</p>
                 <p>Graduation Year: {{ profile.graduationyear }}</p>
             </div>
-            <div id="show-pdf" class="d-none"></div>
+            <div id="show-pdf" class="d-none col-md-12 text-center mt-5"></div>
 
         </div>
         <div class="d-flex justify-content-center mt-5">
@@ -50,18 +50,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
     <script>
         function viewpdf() {
-            var doc = new jsPDF();
-            doc.text(20, 20, 'Hello world!');
-            doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
-            doc.addPage();
-            doc.text(20, 20, 'Do you like that?');
+            var pdf = new jsPDF();
+            pdf.text("Certificate ID: {{profile.certificate_id}}", 10, 10);
+            pdf.text("Name: {{profile.firstname}} {{profile.lastname}}", 10, 20);
+            pdf.text("Email: {{profile.email}}", 10, 30);
+            pdf.text("Contact: {{profile.contact}}", 10, 40);
+            pdf.text("Student ID: {{profile.address}}", 10, 50);
+            pdf.text("Graduation Year: {{profile.graduationyear}}", 10, 60);
 
             const showPDF = document.getElementById('show-pdf');
             showPDF.classList.remove('d-none');
             const certificate = document.getElementById('certificate');
             certificate.classList.add('d-none');
 
-            // show the pdf 
+            // Generate data URL from the jsPDF document
+            const dataUrl = pdf.output('datauristring');
+
+            // Create an <iframe> element
+            const iframe = document.createElement('iframe');
+            iframe.src = dataUrl;
+            iframe.width = '100%';
+            iframe.height = '600px';
+
+            // Clear any existing content in the showPDF element
+            showPDF.innerHTML = '';
+
+            // Append the <iframe> to the showPDF element
+            showPDF.appendChild(iframe);
+            
 
         }
     </script>
