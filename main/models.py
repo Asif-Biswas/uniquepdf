@@ -9,7 +9,7 @@ class Profile(models.Model):
     username = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
     contact = models.CharField(max_length=10)
-    address = models.CharField(max_length=200)
+    student_id = models.CharField(max_length=200)
     graduationyear = models.IntegerField()
     certificate_id = models.CharField(max_length=10, default="000000")
     transcript_id = models.CharField(max_length=10, default="000000")
