@@ -10,8 +10,11 @@
           <a class="nav-link" href="{% url 'home' %}">Home</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'verify' %}">Verify</span></a>
+            <a class="nav-link" href="{% url 'verify' %}">Verify Certificate</span></a>
           </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'tverify' %}">Verify Transcript</span></a>
+            </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'profile' %}">Profile</a>

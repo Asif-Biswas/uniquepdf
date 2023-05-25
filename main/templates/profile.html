@@ -43,6 +43,7 @@
         <div class="d-flex justify-content-center mt-5">
             <button onclick="viewpdf()" class="btn btn-primary">View Certificate</button>
             <a href="{% url 'pdf' %}" class=" ml-2 btn btn-primary">Download Certificate</a>
+            <button onclick="viewtpdf()" class="btn ml-2 btn-primary">View Transcript</button>
             <a href="{% url 'tpdf' %}" class=" ml-2 btn btn-primary">Download Transcript</a>
         </div>
     </div>
@@ -52,6 +53,38 @@
         function viewpdf() {
             var pdf = new jsPDF();
             pdf.text("Certificate ID: {{profile.certificate_id}}", 10, 10);
+            pdf.text("Name: {{profile.firstname}} {{profile.lastname}}", 10, 20);
+            pdf.text("Email: {{profile.email}}", 10, 30);
+            pdf.text("Contact: {{profile.contact}}", 10, 40);
+            pdf.text("Student ID: {{profile.address}}", 10, 50);
+            pdf.text("Graduation Year: {{profile.graduationyear}}", 10, 60);
+
+            const showPDF = document.getElementById('show-pdf');
+            showPDF.classList.remove('d-none');
+            const certificate = document.getElementById('certificate');
+            certificate.classList.add('d-none');
+
+            // Generate data URL from the jsPDF document
+            const dataUrl = pdf.output('datauristring');
+
+            // Create an <iframe> element
+            const iframe = document.createElement('iframe');
+            iframe.src = dataUrl;
+            iframe.width = '100%';
+            iframe.height = '600px';
+
+            // Clear any existing content in the showPDF element
+            showPDF.innerHTML = '';
+
+            // Append the <iframe> to the showPDF element
+            showPDF.appendChild(iframe);
+            
+
+        }
+
+        function viewtpdf() {
+            var pdf = new jsPDF();
+            pdf.text("Transcript ID: {{profile.certificate_id}}", 10, 10);
             pdf.text("Name: {{profile.firstname}} {{profile.lastname}}", 10, 20);
             pdf.text("Email: {{profile.email}}", 10, 30);
             pdf.text("Contact: {{profile.contact}}", 10, 40);

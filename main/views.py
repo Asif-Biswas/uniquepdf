@@ -131,6 +131,17 @@ def verify(request):
     return render(request, "verify.html")
 
 
+def tverify(request):
+    if request.method == "POST":
+        certificate_id = request.POST.get("pdf")
+        try:
+            profile = Profile.objects.get(certificate_id=certificate_id)
+        except:
+            messages.error(request, "Invalid Transcript ID")
+            return render(request, "tverify.html")
+        return render(request, "tpdf.html", {"profile": profile})
+    return render(request, "tverify.html")
+
 def profile(request):
     profile = Profile.objects.get(username=request.user.username)
     return render(request, "profile.html", {"profile": profile})
