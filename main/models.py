@@ -11,6 +11,7 @@ class Profile(models.Model):
     contact = models.CharField(max_length=10)
     address = models.CharField(max_length=200)
     graduationyear = models.IntegerField()
+    certificate_id = models.CharField(max_length=10, default="000000")
     
     def __str__(self):
         return self.username

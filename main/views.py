@@ -75,6 +75,17 @@ def register(request):
         user.first_name = firstname
         user.last_name = lastname
         user.save()
+
+        len_of_total_profile = Profile.objects.all().count() + 1
+        len_of_total_profile = str(len_of_total_profile)
+        len_of_total_profile = len_of_total_profile.zfill(5)
+        certificate_id = graduationyear[-2:] + len_of_total_profile
+        while Profile.objects.filter(certificate_id=certificate_id).exists():
+            len_of_total_profile = int(len_of_total_profile) + 1
+            len_of_total_profile = str(len_of_total_profile)
+            len_of_total_profile = len_of_total_profile.zfill(5)
+            certificate_id = graduationyear[-2:] + len_of_total_profile
+
         profile = Profile.objects.create(
             user=user,
             firstname=firstname, 
@@ -83,7 +94,8 @@ def register(request):
             email=email, 
             contact=contact, 
             address=address, 
-            graduationyear=graduationyear)
+            graduationyear=graduationyear,
+            certificate_id=certificate_id)
         profile.save()
         messages.success(request, "Account created successfully")
         return render(request, "login.html")
