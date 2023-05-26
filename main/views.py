@@ -118,7 +118,7 @@ def register(request):
             username=username, 
             email=email, 
             contact=contact, 
-            address=address, 
+            student_id=address, 
             graduationyear=graduationyear,
             certificate_id=certificate_id,
             transcript_id=transcript_id)
