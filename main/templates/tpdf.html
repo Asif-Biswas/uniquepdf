@@ -32,7 +32,7 @@
                 <p>Name: {{profile.firstname}} {{profile.lastname}}</p>
                 <p>Email: {{profile.email}}</p>
                 <p>Contact: {{profile.contact}}</p>
-                <p>Student ID: {{profile.address}}</p>
+                <p>Student ID: {{profile.student_id}}</p>
                 <p>Graduation Year: {{profile.graduationyear}}</p>
             </div>
 
@@ -55,7 +55,7 @@
             pdf.text("Name: {{profile.firstname}} {{profile.lastname}}", 10, 20);
             pdf.text("Email: {{profile.email}}", 10, 30);
             pdf.text("Contact: {{profile.contact}}", 10, 40);
-            pdf.text("Student ID: {{profile.address}}", 10, 50);
+            pdf.text("Student ID: {{profile.student_id}}", 10, 50);
             pdf.text("Graduation Year: {{profile.graduationyear}}", 10, 60);
             pdf.save("transcript.pdf");
         }
